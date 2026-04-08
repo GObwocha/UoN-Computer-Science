@@ -1,0 +1,114 @@
+{% extends "admin/base.html" %}
+{% block title %}Public Monitoring{% endblock %}
+{% block admin_heading %}Public page monitoring{% endblock %}
+{% block admin_intro %}Watch content freshness, public entry points and open workload affecting the public-facing portal.{% endblock %}
+{% block content %}
+<section class="admin-kpi-grid">
+    <article class="admin-kpi-card">
+        <span>Public routes</span>
+        <strong>{{ metrics.service_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>County coverage</span>
+        <strong>{{ metrics.county_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Recent notices</span>
+        <strong>{{ metrics.recent_notice_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Live programs</span>
+        <strong>{{ metrics.live_program_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Visible research</span>
+        <strong>{{ metrics.visible_research_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Featured licences</span>
+        <strong>{{ metrics.featured_license_count }}</strong>
+    </article>
+    <article class="admin-kpi-card admin-kpi-alert">
+        <span>Incident backlog</span>
+        <strong>{{ metrics.incident_backlog_count }}</strong>
+    </article>
+    <article class="admin-kpi-card admin-kpi-alert">
+        <span>Licensing backlog</span>
+        <strong>{{ metrics.licensing_backlog_count }}</strong>
+    </article>
+</section>
+
+<section class="admin-grid-two">
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Availability</p>
+            <h2>Public entry points</h2>
+        </div>
+        <div class="admin-link-list">
+            {% for route in public_routes %}
+                <a href="{{ route.url }}" target="_blank" rel="noreferrer">{{ route.label }}</a>
+            {% endfor %}
+        </div>
+        <div class="admin-monitoring-dates">
+            <p><strong>Latest notice:</strong> {{ metrics.latest_notice_date|date_label if metrics.latest_notice_date else "Not available" }}</p>
+            <p><strong>Latest incident:</strong> {{ metrics.latest_incident_date|date_label("%d %b %Y %H:%M") if metrics.latest_incident_date else "Not available" }}</p>
+            <p><strong>Latest application:</strong> {{ metrics.latest_application_date|date_label("%d %b %Y %H:%M") if metrics.latest_application_date else "Not available" }}</p>
+        </div>
+    </article>
+
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Recent notices</p>
+            <h2>Latest public updates</h2>
+        </div>
+        <div class="timeline-list">
+            {% for update in latest_public_updates %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ update.publish_date|date_label }} | {{ update.category }}</p>
+                    <h3>{{ update.title }}</h3>
+                    <span>{{ update.county_name }}</span>
+                </article>
+            {% endfor %}
+            {% if not latest_public_updates %}
+                <p class="admin-empty">No public notices available yet.</p>
+            {% endif %}
+        </div>
+    </article>
+</section>
+
+<section class="agency-card">
+    <div class="section-heading">
+        <p class="eyebrow">Freshness</p>
+        <h2>County content watch</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>County</th>
+                    <th>Risk</th>
+                    <th>Last notice</th>
+                    <th>Notices</th>
+                    <th>Programs</th>
+                    <th>Research</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for county in county_freshness %}
+                    <tr>
+                        <td>{{ county.county_name }}</td>
+                        <td>{{ county.risk_level }}</td>
+                        <td>{{ county.last_notice_date|date_label if county.last_notice_date else "None" }}</td>
+                        <td>{{ county.notice_count }}</td>
+                        <td>{{ county.program_count }}</td>
+                        <td>{{ county.research_count }}</td>
+                    </tr>
+                {% endfor %}
+                {% if not county_freshness %}
+                    <tr><td colspan="6">County content freshness data is not available yet.</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

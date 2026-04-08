@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Records Search{% endblock %}
+{% block content %}
+<section class="page-hero page-hero-narrow">
+    <div>
+        <p class="eyebrow">Agency records search</p>
+        <h1>Search published records and guidance</h1>
+        <p>Search across county profiles, licensing services, research activity, program records and published notices from one agency search page.</p>
+    </div>
+    <aside class="hero-briefing">
+        <p class="eyebrow">Coverage</p>
+        <h2>{{ summary.document_count }} records indexed</h2>
+        <p>Search data covers counties, permits, research, programs and notices.</p>
+        <p>Last updated: {{ summary.last_indexed_at|date_label if summary.last_indexed_at else "Pending update" }}</p>
+    </aside>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Search</p>
+            <h2>Find related agency records</h2>
+        </div>
+        <form method="get" class="agency-form">
+            <label for="knowledge-query" class="form-label">Search terms</label>
+            <div class="search-row">
+                <input id="knowledge-query" name="q" value="{{ query_text }}" class="form-control search-input" placeholder="Try flood readiness, wetland permit, mangrove restoration or river cleanup">
+                <button type="submit" class="btn-agency">Search</button>
+            </div>
+            {% if search_hint %}
+                <div class="validation-box">
+                    <p>{{ search_hint }}</p>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Search data</p>
+            <h2>Refresh indexed records</h2>
+        </div>
+        <form action="{{ url_for('knowledge_search') }}" method="post" class="agency-form">
+            <p>Use this after updates to notices, county records, licensing or research information so the latest records appear in search results.</p>
+            <button type="submit" class="btn-agency">Refresh search data</button>
+        </form>
+    </div>
+</section>
+
+<section class="section-shell">
+    <div class="section-heading">
+        <p class="eyebrow">Results</p>
+        <h2>{{ results|length }} records found</h2>
+        {% if query_text %}
+            <p>Search term: "{{ query_text }}"</p>
+        {% endif %}
+    </div>
+
+    <div class="card-grid">
+        {% for result in results %}
+            <article class="agency-card">
+                <p class="card-meta">{{ result.source_type }} | {{ result.category }}</p>
+                <h3>{{ result.title }}</h3>
+                <p>{{ result.summary }}</p>
+                <dl class="county-facts">
+                    <div>
+                        <dt>County scope</dt>
+                        <dd>{{ result.county_name }}</dd>
+                    </div>
+                    <div>
+                        <dt>Match score</dt>
+                        <dd>{{ "%.4f"|format(result.similarity_score) }}</dd>
+                    </div>
+                </dl>
+                {% if result.route_endpoint == 'county_details' %}
+                    <a href="{{ url_for('county_details', county_id=result.route_record_id) }}">Open record</a>
+                {% elif result.route_endpoint == 'licensing' %}
+                    <a href="{{ url_for('licensing') }}">Open record</a>
+                {% elif result.route_endpoint == 'research' %}
+                    <a href="{{ url_for('research') }}">Open record</a>
+                {% else %}
+                    <a href="{{ url_for('home') }}">Open record</a>
+                {% endif %}
+            </article>
+        {% endfor %}
+
+        {% if not results %}
+            <article class="agency-card">
+                <h3>No matching records found</h3>
+                <p>Try broader terms such as flood response, air quality, shoreline protection, wetlands or licensing.</p>
+                <a href="{{ url_for('counties') }}">Browse county records</a>
+            </article>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

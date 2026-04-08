@@ -1,0 +1,162 @@
+{% extends "admin/base.html" %}
+{% block title %}Licensing Management{% endblock %}
+{% block admin_heading %}Licensing management{% endblock %}
+{% block admin_intro %}Maintain licensing services and process incoming applications from the public portal.{% endblock %}
+{% block content %}
+<section class="admin-status-row">
+    {% for item in status_summary %}
+        <article class="admin-status-card">
+            <span>{{ item.status }}</span>
+            <strong>{{ item.status_count }}</strong>
+        </article>
+    {% endfor %}
+    {% if not status_summary %}
+        <article class="admin-status-card">
+            <span>No application data available</span>
+            <strong>0</strong>
+        </article>
+    {% endif %}
+</section>
+
+<section class="admin-grid-two">
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Service setup</p>
+            <h2>Create a licensing service</h2>
+        </div>
+        {% if service_errors %}
+            <div class="validation-box">
+                {% for error in service_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form class="agency-form" action="{{ url_for('admin.create_license_service') }}" method="post">
+            <div class="form-grid">
+                <div>
+                    <label class="form-label" for="service_county_id">County</label>
+                    <select class="form-select" id="service_county_id" name="county_id">
+                        <option value="">National service</option>
+                        {% for county in counties %}
+                            <option value="{{ county.county_id }}" {% if service_form_data.county_id == county.county_id|string %}selected{% endif %}>{{ county.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label" for="service_sort_order">Sort order</label>
+                    <input class="form-control" id="service_sort_order" name="sort_order" type="number" min="1" value="{{ service_form_data.sort_order }}">
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="service_title">Title</label>
+                    <input class="form-control" id="service_title" name="title" type="text" value="{{ service_form_data.title }}">
+                </div>
+                <div>
+                    <label class="form-label" for="service_category">Category</label>
+                    <input class="form-control" id="service_category" name="category" type="text" value="{{ service_form_data.category }}">
+                </div>
+                <div>
+                    <label class="form-label" for="service_days">Processing days</label>
+                    <input class="form-control" id="service_days" name="processing_window_days" type="number" min="1" value="{{ service_form_data.processing_window_days }}">
+                </div>
+                <div>
+                    <label class="form-label" for="service_fee">Fee (KES)</label>
+                    <input class="form-control" id="service_fee" name="fee_ksh" type="number" min="0" step="0.01" value="{{ service_form_data.fee_ksh }}">
+                </div>
+                <div class="admin-checkbox-row">
+                    <label><input type="checkbox" name="is_featured" {% if service_form_data.is_featured %}checked{% endif %}> Feature on public pages</label>
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="service_applies_to">Applies to</label>
+                    <input class="form-control" id="service_applies_to" name="applies_to" type="text" value="{{ service_form_data.applies_to }}">
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="service_summary">Summary</label>
+                    <textarea id="service_summary" name="summary" rows="3">{{ service_form_data.summary }}</textarea>
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="service_requirements">Requirements</label>
+                    <textarea id="service_requirements" name="requirements" rows="3">{{ service_form_data.requirements }}</textarea>
+                </div>
+            </div>
+            <button class="btn-agency" type="submit">Create service</button>
+        </form>
+    </article>
+
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Current services</p>
+            <h2>Available licensing routes</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>County</th>
+                        <th>Category</th>
+                        <th>Processing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in license_services %}
+                        <tr>
+                            <td>{{ service.title }}{% if service.is_featured %} (Featured){% endif %}</td>
+                            <td>{{ service.county_name }}</td>
+                            <td>{{ service.category }}</td>
+                            <td>{{ service.processing_window_days }} days</td>
+                        </tr>
+                    {% endfor %}
+                    {% if not license_services %}
+                        <tr><td colspan="4">No services available yet.</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+
+<section class="agency-card">
+    <div class="section-heading">
+        <p class="eyebrow">Application queue</p>
+        <h2>Submitted applications</h2>
+    </div>
+    <div class="admin-card-stack">
+        {% for application in applications %}
+            <article class="admin-record-card">
+                <div class="admin-record-header">
+                    <div>
+                        <p class="card-meta">{{ application.submitted_at|date_label("%d %b %Y %H:%M") }} | {{ application.county_name }}</p>
+                        <h3>{{ application.license_title }}</h3>
+                    </div>
+                    <span class="county-pill">{{ application.status }}</span>
+                </div>
+                <p><strong>Applicant:</strong> {{ application.applicant_name }} | {{ application.organization_name }}</p>
+                <p><strong>Contact:</strong> {{ application.applicant_email }}</p>
+                <p><strong>Project location:</strong> {{ application.project_location }}</p>
+                <p>{{ application.project_summary }}</p>
+                <p><strong>Supporting documents:</strong> {{ application.supporting_documents }}</p>
+                <form class="agency-form admin-inline-form" action="{{ url_for('admin.update_license_application', application_id=application.application_id) }}" method="post">
+                    <div class="form-grid">
+                        <div>
+                            <label class="form-label" for="application_status_{{ application.application_id }}">Status</label>
+                            <select class="form-select" id="application_status_{{ application.application_id }}" name="status">
+                                {% for status in application_statuses %}
+                                    <option value="{{ status }}" {% if application.status == status %}selected{% endif %}>{{ status }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-span">
+                            <label class="form-label" for="application_notes_{{ application.application_id }}">Review notes</label>
+                            <textarea id="application_notes_{{ application.application_id }}" name="review_notes" rows="3">{{ application.review_notes or "" }}</textarea>
+                        </div>
+                    </div>
+                    <button class="btn-agency" type="submit">Save application update</button>
+                </form>
+            </article>
+        {% endfor %}
+        {% if not applications %}
+            <p class="admin-empty">No licence applications have been received yet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

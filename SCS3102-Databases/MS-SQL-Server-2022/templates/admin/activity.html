@@ -1,0 +1,94 @@
+{% extends "admin/base.html" %}
+{% block title %}Admin Activity{% endblock %}
+{% block admin_heading %}Administrator activity{% endblock %}
+{% block admin_intro %}Review administrator accounts and recent actions across the internal dashboard.{% endblock %}
+{% block content %}
+<section class="admin-grid-two">
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Accounts</p>
+            <h2>Administrator users</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Username</th>
+                        <th>Last login</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for admin in admins %}
+                        <tr>
+                            <td>{{ admin.full_name }}</td>
+                            <td>{{ admin.role_name }}</td>
+                            <td>{{ admin.username }}</td>
+                            <td>{{ admin.last_login_at|date_label("%d %b %Y %H:%M") if admin.last_login_at else "Not yet recorded" }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% if not admins %}
+                        <tr><td colspan="4">No administrator accounts available.</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Summary</p>
+            <h2>Recent activity types</h2>
+        </div>
+        <div class="timeline-list">
+            {% for item in activity_summary %}
+                <article class="timeline-item">
+                    <p class="card-meta">Last 30 days</p>
+                    <h3>{{ item.activity_type }}</h3>
+                    <span>{{ item.activity_count }} actions</span>
+                </article>
+            {% endfor %}
+            {% if not activity_summary %}
+                <p class="admin-empty">Activity summaries will appear after administrators start using the dashboard.</p>
+            {% endif %}
+        </div>
+    </article>
+</section>
+
+<section class="agency-card">
+    <div class="section-heading">
+        <p class="eyebrow">Audit log</p>
+        <h2>Recent administrator actions</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>When</th>
+                    <th>Administrator</th>
+                    <th>Activity</th>
+                    <th>Record</th>
+                    <th>Description</th>
+                    <th>IP</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in activity_log %}
+                    <tr>
+                        <td>{{ item.occurred_at|date_label("%d %b %Y %H:%M") }}</td>
+                        <td>{{ item.admin_name }}</td>
+                        <td>{{ item.activity_type }}</td>
+                        <td>{{ item.entity_type }}{% if item.entity_id %} #{{ item.entity_id }}{% endif %}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.ip_address or "Not captured" }}</td>
+                    </tr>
+                {% endfor %}
+                {% if not activity_log %}
+                    <tr><td colspan="6">No administrator actions recorded yet.</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

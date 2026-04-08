@@ -1,0 +1,177 @@
+{% extends "admin/base.html" %}
+{% block title %}Content Management{% endblock %}
+{% block admin_heading %}Content management{% endblock %}
+{% block admin_intro %}Publish notices and create county programs that feed the public portal.{% endblock %}
+{% block content %}
+<section class="admin-grid-two">
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Public notice</p>
+            <h2>Create a notice</h2>
+        </div>
+        {% if update_errors %}
+            <div class="validation-box">
+                {% for error in update_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form class="agency-form" action="{{ url_for('admin.create_update') }}" method="post">
+            <div class="form-grid">
+                <div>
+                    <label class="form-label" for="update_county_id">County</label>
+                    <select class="form-select" id="update_county_id" name="county_id">
+                        <option value="">National notice</option>
+                        {% for county in counties %}
+                            <option value="{{ county.county_id }}" {% if update_form_data.county_id == county.county_id|string %}selected{% endif %}>{{ county.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label" for="update_category">Category</label>
+                    <select class="form-select" id="update_category" name="category">
+                        <option value="">Select category</option>
+                        {% for category in update_categories %}
+                            <option value="{{ category }}" {% if update_form_data.category == category %}selected{% endif %}>{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="update_title">Title</label>
+                    <input class="form-control" id="update_title" name="title" type="text" value="{{ update_form_data.title }}">
+                </div>
+                <div>
+                    <label class="form-label" for="update_publish_date">Publish date</label>
+                    <input class="form-control" id="update_publish_date" name="publish_date" type="date" value="{{ update_form_data.publish_date }}">
+                </div>
+                <div class="admin-checkbox-row">
+                    <label><input type="checkbox" name="is_featured" {% if update_form_data.is_featured %}checked{% endif %}> Feature on public pages</label>
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="update_summary">Summary</label>
+                    <textarea id="update_summary" name="summary" rows="4">{{ update_form_data.summary }}</textarea>
+                </div>
+            </div>
+            <button class="btn-agency" type="submit">Publish notice</button>
+        </form>
+    </article>
+
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Program</p>
+            <h2>Create a county program</h2>
+        </div>
+        {% if program_errors %}
+            <div class="validation-box">
+                {% for error in program_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form class="agency-form" action="{{ url_for('admin.create_program') }}" method="post">
+            <div class="form-grid">
+                <div>
+                    <label class="form-label" for="program_county_id">County</label>
+                    <select class="form-select" id="program_county_id" name="county_id">
+                        <option value="">Select county</option>
+                        {% for county in counties %}
+                            <option value="{{ county.county_id }}" {% if program_form_data.county_id == county.county_id|string %}selected{% endif %}>{{ county.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label" for="program_status">Status</label>
+                    <select class="form-select" id="program_status" name="status">
+                        {% for status in program_statuses %}
+                            <option value="{{ status }}" {% if program_form_data.status == status %}selected{% endif %}>{{ status }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="program_title">Program title</label>
+                    <input class="form-control" id="program_title" name="title" type="text" value="{{ program_form_data.title }}">
+                </div>
+                <div>
+                    <label class="form-label" for="program_budget">Budget (millions KES)</label>
+                    <input class="form-control" id="program_budget" name="budget_millions" type="number" step="0.1" min="0" value="{{ program_form_data.budget_millions }}">
+                </div>
+                <div>
+                    <label class="form-label" for="program_beneficiaries">Beneficiaries</label>
+                    <input class="form-control" id="program_beneficiaries" name="beneficiaries" type="number" min="1" value="{{ program_form_data.beneficiaries }}">
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="program_summary">Summary</label>
+                    <textarea id="program_summary" name="summary" rows="4">{{ program_form_data.summary }}</textarea>
+                </div>
+            </div>
+            <button class="btn-agency" type="submit">Create program</button>
+        </form>
+    </article>
+</section>
+
+<section class="admin-grid-two">
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Recent notices</p>
+            <h2>Published content</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>County</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for update in recent_updates %}
+                        <tr>
+                            <td>{{ update.publish_date|date_label }}</td>
+                            <td>{{ update.title }}{% if update.is_featured %} (Featured){% endif %}</td>
+                            <td>{{ update.category }}</td>
+                            <td>{{ update.county_name }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% if not recent_updates %}
+                        <tr><td colspan="4">No notices published yet.</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Recent programs</p>
+            <h2>County initiatives</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Program</th>
+                        <th>County</th>
+                        <th>Status</th>
+                        <th>Budget</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for program in recent_programs %}
+                        <tr>
+                            <td>{{ program.title }}</td>
+                            <td>{{ program.county_name }}</td>
+                            <td>{{ program.status }}</td>
+                            <td>KES {{ "{:,.1f}".format(program.budget_millions) }} M</td>
+                        </tr>
+                    {% endfor %}
+                    {% if not recent_programs %}
+                        <tr><td colspan="4">No programs created yet.</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+{% endblock %}

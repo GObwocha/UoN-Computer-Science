@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+{% block title %}Incident Management{% endblock %}
+{% block admin_heading %}Incident management{% endblock %}
+{% block admin_intro %}Review incoming public reports, update their handling status and record follow-up notes.{% endblock %}
+{% block content %}
+<section class="admin-status-row">
+    {% for item in status_summary %}
+        <article class="admin-status-card">
+            <span>{{ item.status }}</span>
+            <strong>{{ item.status_count }}</strong>
+        </article>
+    {% endfor %}
+    {% if not status_summary %}
+        <article class="admin-status-card">
+            <span>No incident data available</span>
+            <strong>0</strong>
+        </article>
+    {% endif %}
+</section>
+
+<section class="agency-card">
+    <div class="section-heading">
+        <p class="eyebrow">Operational queue</p>
+        <h2>Reported incidents</h2>
+    </div>
+    <div class="admin-card-stack">
+        {% for incident in incidents %}
+            <article class="admin-record-card">
+                <div class="admin-record-header">
+                    <div>
+                        <p class="card-meta">{{ incident.reported_at|date_label("%d %b %Y %H:%M") }} | {{ incident.county_name }}</p>
+                        <h3>{{ incident.category }} at {{ incident.location }}</h3>
+                    </div>
+                    <span class="county-pill">{{ incident.status }}</span>
+                </div>
+                <p>{{ incident.description }}</p>
+                <p><strong>Reporter:</strong> {{ incident.reporter_name }} | {{ incident.reporter_email }}</p>
+                <p><strong>Handling office:</strong> {{ incident.response_location_name }}</p>
+                <form class="agency-form admin-inline-form" action="{{ url_for('admin.update_incident', report_id=incident.report_id) }}" method="post">
+                    <div class="form-grid">
+                        <div>
+                            <label class="form-label" for="incident_status_{{ incident.report_id }}">Status</label>
+                            <select class="form-select" id="incident_status_{{ incident.report_id }}" name="status">
+                                {% for status in incident_statuses %}
+                                    <option value="{{ status }}" {% if incident.status == status %}selected{% endif %}>{{ status }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-span">
+                            <label class="form-label" for="incident_notes_{{ incident.report_id }}">Review notes</label>
+                            <textarea id="incident_notes_{{ incident.report_id }}" name="review_notes" rows="3">{{ incident.review_notes or "" }}</textarea>
+                        </div>
+                    </div>
+                    <button class="btn-agency" type="submit">Save incident update</button>
+                </form>
+            </article>
+        {% endfor %}
+        {% if not incidents %}
+            <p class="admin-empty">No incidents have been logged yet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

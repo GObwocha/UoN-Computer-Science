@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Research Activities{% endblock %}
+{% block content %}
+<section class="page-hero page-hero-narrow">
+    <div>
+        <p class="eyebrow">Research and monitoring</p>
+        <h1>Environmental research activities</h1>
+        <p>Track field studies, monitoring exercises and county-linked investigations that support environmental planning, licensing and disaster readiness.</p>
+    </div>
+    <form class="search-panel" method="get">
+        <label for="research-search" class="form-label">Search research activities</label>
+        <div class="search-row">
+            <input id="research-search" name="q" value="{{ search_term }}" class="form-control search-input" placeholder="Try wetland, coast, drought or Nairobi">
+            <button type="submit" class="btn-agency">Search</button>
+        </div>
+    </form>
+</section>
+
+<section class="section-shell">
+    <div class="section-heading">
+        <p class="eyebrow">Results</p>
+        <h2>{{ research_activities|length }} research activities found</h2>
+        {% if search_term %}
+            <p>Filtered by "{{ search_term }}". <a href="{{ url_for('research') }}">Clear search</a></p>
+        {% endif %}
+    </div>
+
+    <div class="card-grid">
+        {% for activity in research_activities %}
+            <article class="agency-card">
+                <p class="card-meta">{{ activity.research_theme }} | {{ activity.county_name }}</p>
+                <h3>{{ activity.title }}</h3>
+                <p>{{ activity.summary }}</p>
+                <dl class="county-facts">
+                    <div>
+                        <dt>Status</dt>
+                        <dd>{{ activity.status }}</dd>
+                    </div>
+                    <div>
+                        <dt>Started</dt>
+                        <dd>{{ activity.start_date|date_label }}</dd>
+                    </div>
+                    <div>
+                        <dt>Lead office</dt>
+                        <dd>{{ activity.lead_office }}</dd>
+                    </div>
+                    <div>
+                        <dt>Outputs</dt>
+                        <dd>{{ activity.outputs }}</dd>
+                    </div>
+                </dl>
+            </article>
+        {% endfor %}
+
+        {% if not research_activities %}
+            <article class="agency-card">
+                <h3>No research activities matched</h3>
+                <p>Try a county, theme or keyword such as flood, mangrove, wetland or drought.</p>
+                <a href="{{ url_for('research') }}">Show all research activities</a>
+            </article>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

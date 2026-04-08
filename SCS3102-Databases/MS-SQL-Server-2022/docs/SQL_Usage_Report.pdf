@@ -1,0 +1,327 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 6 /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+6 0 obj
+<< /Length 3180 >>
+stream
+BT /F2 20 Tf 1 0 0 1 52 782 Tm (Special Report: How SQL Server Was Used in) Tj ET
+BT /F2 20 Tf 1 0 0 1 52 756 Tm (This Project) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 716 Tm (1. Purpose of SQL Server in the Project) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 691 Tm (SQL Server is the core data layer of the Kenya Environment Portal. It stores all) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 676 Tm (structured information used by both the public website and the administrator dashboard.) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 661 Tm (SSMS 22 is used to create the database, inspect tables, run queries, and test that the) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 646 Tm (system is working correctly.) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 623 Tm (In this project, SQL Server was not used only for simple storage. It was used for:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 608 Tm (- database creation) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 593 Tm (- data seeding) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 578 Tm (- public content retrieval) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 563 Tm (- form submission storage) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 548 Tm (- administrator authentication) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 533 Tm (- audit logging) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 518 Tm (- record normalization) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 503 Tm (- similarity-search indexing) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 488 Tm (- performance optimization using indexes) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 465 Tm (2. Database Creation) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 440 Tm (The full database setup is defined in:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 425 Tm (- database/CreateKenyaEnvironmentPortal.sql) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 402 Tm (This script performs the following tasks:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 387 Tm (1. Creates the database KenyaEnvironmentPortalDb if it does not already exist.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 372 Tm (2. Drops old tables, procedures, and functions so the database can be rebuilt) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 357 Tm (   cleanly.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 342 Tm (3. Creates all required tables.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 327 Tm (4. Creates indexes.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 312 Tm (5. Inserts seed data for counties, services, licensing, research, updates,) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 297 Tm (   programs, incidents, and admin users.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 282 Tm (6. Creates the function and stored procedure used for records indexing.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 267 Tm (7. Rebuilds the knowledge index at the end of the script.) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 244 Tm (3. Main Tables and Their Roles) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 211 Tm (dbo.Counties) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 192 Tm (Stores all 47 Kenyan counties and their profile data. This supports the county directory) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 177 Tm (and county-detail pages.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 154 Tm (dbo.ResponseLocations) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 135 Tm (Stores all county offices plus the national disaster coordination location. This) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 120 Tm (supports the incident desk.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 97 Tm (dbo.Services) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 78 Tm (Stores quick service cards shown on the public portal.) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3041 >>
+stream
+BT /F2 13 Tf 1 0 0 1 52 782 Tm (dbo.LicensingServices) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 763 Tm (Stores environmental permit and approval services. Used by the public licensing page and) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 748 Tm (by the admin licensing section.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 725 Tm (dbo.LicenseApplications) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 706 Tm (Stores submitted licence applications from users. Also includes status and review notes) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 691 Tm (for administrator processing.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 668 Tm (dbo.Updates) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 649 Tm (Stores national and county public notices, alerts, and announcements.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 626 Tm (dbo.Programs) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 607 Tm (Stores county environmental programs and initiatives.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 584 Tm (dbo.ResearchActivities) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 565 Tm (Stores research and monitoring activities.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 542 Tm (dbo.IncidentReports) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 523 Tm (Stores public incident reports and review status information.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 500 Tm (dbo.AdminUsers) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 481 Tm (Stores administrator identities, usernames, emails, password hashes, roles, and login) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 466 Tm (timestamps.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 443 Tm (dbo.AdminActivityLog) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 424 Tm (Stores administrator audit logs such as sign-ins, sign-outs, content publishing, record) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 409 Tm (updates, and index rebuilds.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 386 Tm (dbo.KnowledgeDocuments) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 367 Tm (Stores normalized public records prepared for search indexing.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 344 Tm (dbo.KnowledgeVectorIndex) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 325 Tm (Stores non-zero vector dimensions for the similarity search process.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 302 Tm (dbo.KnowledgeStopWords) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 283 Tm (Stores common words removed during normalization.) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 260 Tm (4. SQL Server Features Demonstrated) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 227 Tm (A. Table creation) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 208 Tm (The project uses CREATE TABLE statements to define the full schema.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 185 Tm (B. Primary keys and foreign keys) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 166 Tm (Relationships are enforced through SQL foreign keys. Examples:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 151 Tm (- ResponseLocations.CountyId references Counties.CountyId) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 136 Tm (- LicenseApplications.LicenseServiceId references) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 121 Tm (  LicensingServices.LicenseServiceId) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 106 Tm (- IncidentReports.ResponseLocationId references) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 91 Tm (  ResponseLocations.ResponseLocationId) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 76 Tm (- AdminActivityLog.AdminUserId references AdminUsers.AdminUserId) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 2911 >>
+stream
+BT /F1 11 Tf 1 0 0 1 52 782 Tm (This ensures the database remains consistent and relational.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 759 Tm (C. Seed data insertion) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 740 Tm (The script uses INSERT INTO statements to load:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 725 Tm (- all counties) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 710 Tm (- county offices) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 695 Tm (- national response location) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 680 Tm (- public service cards) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 665 Tm (- licensing services) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 650 Tm (- research activities) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 635 Tm (- public updates) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 620 Tm (- programs) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 605 Tm (- example licence applications) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 590 Tm (- example incident reports) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 575 Tm (- administrator account seed) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 552 Tm (This makes the system usable immediately after setup.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 529 Tm (D. Querying data for public pages) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 510 Tm (The application uses SQL SELECT queries throughout repository.py to read data for:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 495 Tm (- homepage metrics) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 480 Tm (- county listings) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 465 Tm (- county details) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 450 Tm (- licensing services) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 435 Tm (- research activities) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 420 Tm (- incident response locations) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 405 Tm (- recent notices) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 390 Tm (- public records search) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 367 Tm (These queries often include:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 352 Tm (- INNER JOIN) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 337 Tm (- LEFT JOIN) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 322 Tm (- COUNT) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 307 Tm (- MAX) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 292 Tm (- GROUP BY) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 277 Tm (- ORDER BY) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 262 Tm (- COALESCE) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 239 Tm (5. How SQL Was Used in Form Handling) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 206 Tm (Public licence applications) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 187 Tm (When a user submits a licence application:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 172 Tm (1. Flask validates the form.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 157 Tm (2. SQL INSERT stores the application in dbo.LicenseApplications.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 142 Tm (3. The inserted ApplicationId is returned using OUTPUT INSERTED.ApplicationId.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 119 Tm (Public incident reports) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 100 Tm (When a user reports an incident:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 85 Tm (1. Flask validates the form.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 70 Tm (2. SQL INSERT stores the report in dbo.IncidentReports.) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 3135 >>
+stream
+BT /F1 11 Tf 1 0 0 1 58 782 Tm (3. The inserted ReportId is returned using OUTPUT INSERTED.ReportId.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 759 Tm (Admin management updates) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 740 Tm (Administrators use SQL UPDATE statements to:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 725 Tm (- change incident status) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 710 Tm (- add incident review notes) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 695 Tm (- change application status) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 680 Tm (- add application review notes) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 665 Tm (- update research status) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 650 Tm (- mark research as featured) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 627 Tm (6. How SQL Was Used for Authentication) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 602 Tm (Administrator authentication is backed by the dbo.AdminUsers table.) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 579 Tm (The process is:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 564 Tm (1. The login form accepts username/email and password.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 549 Tm (2. Flask queries SQL Server to find the matching admin record.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 534 Tm (3. The stored password hash is compared using check_password_hash.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 519 Tm (4. If the login is successful, the session is created in Flask.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 504 Tm (5. SQL updates LastLoginAt.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 489 Tm (6. SQL inserts an audit entry in dbo.AdminActivityLog.) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 466 Tm (Important note:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 451 Tm (- credentials are not displayed in HTML) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 436 Tm (- passwords are stored as hashes, not plain text) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 413 Tm (7. How SQL Was Used for Audit Logging) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 388 Tm (The project records administrator actions in dbo.AdminActivityLog. This is important) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 373 Tm (because it shows accountability and monitoring of system use.) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 350 Tm (Examples of logged actions:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 335 Tm (- administrator sign in) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 320 Tm (- administrator sign out) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 305 Tm (- publishing a notice) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 290 Tm (- creating a program) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 275 Tm (- creating a licensing service) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 260 Tm (- updating a licence application) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 245 Tm (- updating an incident report) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 230 Tm (- creating research activity) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 215 Tm (- rebuilding the records index) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 192 Tm (This makes the admin dashboard more realistic and professional.) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 169 Tm (8. How SQL Was Used for Search and Indexing) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 144 Tm (The project includes a records-search system that depends heavily on SQL Server.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 121 Tm (A. Text normalization) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 102 Tm (The function:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 87 Tm (- dbo.NormalizeKnowledgeText) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 3183 >>
+stream
+BT /F1 11 Tf 1 0 0 1 52 782 Tm (is used to:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 767 Tm (- convert text to lowercase) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 752 Tm (- remove punctuation) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 737 Tm (- split text into tokens) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 722 Tm (- remove stop words) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 707 Tm (- keep only meaningful searchable terms) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 684 Tm (B. Indexed knowledge documents) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 665 Tm (Public content from counties, licensing, programs, research, and updates is transformed) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 650 Tm (into normalized records and inserted into:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 635 Tm (- dbo.KnowledgeDocuments) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 612 Tm (C. Stored procedure for rebuilding the index) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 593 Tm (The procedure:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 578 Tm (- dbo.RebuildKnowledgeIndex) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 555 Tm (is used to:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 540 Tm (1. clear old vector data) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 525 Tm (2. rebuild normalized knowledge documents) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 510 Tm (3. calculate token counts) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 495 Tm (4. generate vector dimensions) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 480 Tm (5. normalize vector values) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 465 Tm (6. store them in dbo.KnowledgeVectorIndex) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 442 Tm (D. Similarity querying) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 423 Tm (The search query in repository.py uses SQL expressions and common table expressions to:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 408 Tm (- normalize the user query) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 393 Tm (- generate a query embedding) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 378 Tm (- compare stored dimensions) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 363 Tm (- calculate dot-product similarity scores) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 348 Tm (- return related records) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 325 Tm (This means SQL Server is being used for more advanced search behavior, not just basic) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 310 Tm (CRUD.) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 287 Tm (9. How SQL Was Used for Performance) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 262 Tm (Indexes were added to improve performance, including:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 247 Tm (- knowledge category indexing) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 232 Tm (- vector dimension indexing) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 217 Tm (- admin activity date indexing) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 202 Tm (- incident status indexing) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 187 Tm (- licence application status indexing) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 164 Tm (These indexes help the admin dashboard and search features read data more efficiently.) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 141 Tm (10. How SQL Supports Normalization and Relational) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 120 Tm (Design) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 95 Tm (The project follows normalized relational design principles in several ways:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 80 Tm (- county information is stored once in Counties) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 65 Tm (- county-linked tables reference counties by foreign key) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Length 3062 >>
+stream
+BT /F1 11 Tf 1 0 0 1 58 782 Tm (- incident response locations are separated from incident reports) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 767 Tm (- licensing services are separated from applications) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 752 Tm (- administrator accounts are separated from their activity logs) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 729 Tm (This reduces duplication and improves data consistency.) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 706 Tm (11. SQL Use Through SSMS 22) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 681 Tm (SSMS 22 is used in this project to:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 666 Tm (- run the database creation script) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 651 Tm (- inspect the tables) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 636 Tm (- view inserted records) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 621 Tm (- verify form submissions) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 606 Tm (- test stored procedures) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 591 Tm (- check search index contents) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 576 Tm (- confirm administrator records) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 553 Tm (Useful verification queries in SSMS include:) Tj ET
+BT /F3 10 Tf 1 0 0 1 58 526 Tm (SELECT * FROM dbo.AdminUsers;) Tj ET
+BT /F3 10 Tf 1 0 0 1 58 513 Tm (SELECT * FROM dbo.AdminActivityLog ORDER BY OccurredAt DESC;) Tj ET
+BT /F3 10 Tf 1 0 0 1 58 500 Tm (SELECT * FROM dbo.LicenseApplications ORDER BY SubmittedAt DESC;) Tj ET
+BT /F3 10 Tf 1 0 0 1 58 487 Tm (SELECT * FROM dbo.IncidentReports ORDER BY ReportedAt DESC;) Tj ET
+BT /F3 10 Tf 1 0 0 1 58 474 Tm (SELECT COUNT\(*\) AS Documents FROM dbo.KnowledgeDocuments;) Tj ET
+BT /F3 10 Tf 1 0 0 1 58 461 Tm (SELECT COUNT\(*\) AS IndexRows FROM dbo.KnowledgeVectorIndex;) Tj ET
+BT /F3 10 Tf 1 0 0 1 58 448 Tm (EXEC dbo.RebuildKnowledgeIndex;) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 423 Tm (12. SQL Use in the Administrator Account Script) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 398 Tm (The file:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 383 Tm (- create_admin_user.py) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 360 Tm (uses SQL to:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 345 Tm (- look for an existing administrator by username or email) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 330 Tm (- update the existing record if found) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 315 Tm (- insert a new administrator if none exists) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 292 Tm (This gives the project a practical way to manage admin credentials without exposing them) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 277 Tm (on web pages.) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 254 Tm (13. Conclusion) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 229 Tm (SQL Server plays a central role in this project. It is used not only for storing) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 214 Tm (records, but also for enforcing relationships, handling transactions, powering the) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 199 Tm (public portal, controlling administrator authentication, logging internal activity, and) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 184 Tm (driving the search/index system. Because of this, the project strongly demonstrates real) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 169 Tm (SQL Server usage suitable for assessment with SSMS 22.) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 16 0 R >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000155 00000 n 
+0000000225 00000 n 
+0000000300 00000 n 
+0000000368 00000 n 
+0000003600 00000 n 
+0000003746 00000 n 
+0000006839 00000 n 
+0000006985 00000 n 
+0000009949 00000 n 
+0000010097 00000 n 
+0000013285 00000 n 
+0000013433 00000 n 
+0000016669 00000 n 
+0000016817 00000 n 
+0000019932 00000 n 
+trailer
+<< /Size 18 /Root 1 0 R >>
+startxref
+20080
+%%EOF

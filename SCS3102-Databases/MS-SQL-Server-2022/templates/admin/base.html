@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}KECSA Admin{% endblock %}</title>
+    <meta name="description" content="Internal administration dashboard for the Kenya Environment and County Services Agency.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-top">
+                <a class="admin-brand" href="{{ url_for('admin.dashboard') }}">
+                    <span class="brand-kicker">KECSA</span>
+                    <span class="admin-brand-title">Administrator Workspace</span>
+                </a>
+            </div>
+
+            <div class="admin-user-card">
+                <p class="card-meta">Signed in as</p>
+                <h2>{{ admin_user.full_name if admin_user else "Administrator" }}</h2>
+                <p>{{ admin_user.role_name if admin_user else "Internal user" }}</p>
+            </div>
+
+            <nav class="admin-nav">
+                {% for item in admin_navigation %}
+                    <a class="{% if request.endpoint == item.endpoint %}is-active{% endif %}" href="{{ url_for(item.endpoint) }}">{{ item.label }}</a>
+                {% endfor %}
+            </nav>
+
+            <div class="admin-sidebar-actions">
+                <a class="btn-agency" href="{{ url_for('home') }}">Open Public Portal</a>
+                <form action="{{ url_for('admin.logout') }}" method="post">
+                    <button type="submit" class="btn-agency btn-agency-secondary admin-logout-button">Sign out</button>
+                </form>
+            </div>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-topbar">
+                <div>
+                    <p class="eyebrow">Internal operations</p>
+                    <h1>{% block admin_heading %}Admin dashboard{% endblock %}</h1>
+                    <p class="admin-subtitle">{% block admin_intro %}Manage the agency workspace.{% endblock %}</p>
+                </div>
+            </header>
+
+            <main class="admin-content">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash-card flash-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                {% if db_error %}
+                    <div class="flash-card flash-error">{{ db_error }}</div>
+                {% endif %}
+
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+</body>
+</html>

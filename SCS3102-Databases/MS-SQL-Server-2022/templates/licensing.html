@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Licensing Services{% endblock %}
+{% block content %}
+<section class="page-hero page-hero-narrow">
+    <div>
+        <p class="eyebrow">Licensing and permits</p>
+        <h1>Environmental licensing services</h1>
+        <p>Review environmental approvals, permit categories, processing windows and application requirements for national and county-linked services.</p>
+    </div>
+    <div class="search-panel">
+        <label for="license-search" class="form-label">Search licensing services</label>
+        <form method="get" class="search-row">
+            <input id="license-search" name="q" value="{{ search_term }}" class="form-control search-input" placeholder="Try waste, wetland, Nairobi or impact">
+            <button type="submit" class="btn-agency">Search</button>
+        </form>
+        <p>Need to make a new application? Use the dedicated online application form.</p>
+        <a href="{{ url_for('license_application') }}">Apply for a licence</a>
+    </div>
+</section>
+
+<section class="section-shell">
+    <div class="section-heading">
+        <p class="eyebrow">Results</p>
+        <h2>{{ licenses|length }} licensing services found</h2>
+        {% if search_term %}
+            <p>Filtered by "{{ search_term }}". <a href="{{ url_for('licensing') }}">Clear search</a></p>
+        {% endif %}
+    </div>
+
+    <div class="card-grid">
+        {% for license in licenses %}
+            <article class="agency-card service-card">
+                <p class="card-meta">{{ license.category }} | {{ license.county_name }}</p>
+                <h3>{{ license.title }}</h3>
+                <p>{{ license.summary }}</p>
+                <dl class="county-facts">
+                    <div>
+                        <dt>Processing</dt>
+                        <dd>{{ license.processing_window_days }} days</dd>
+                    </div>
+                    <div>
+                        <dt>Fee</dt>
+                        <dd>KES {{ "{:,.0f}".format(license.fee_ksh) }}</dd>
+                    </div>
+                    <div>
+                        <dt>Applies to</dt>
+                        <dd>{{ license.applies_to }}</dd>
+                    </div>
+                    <div>
+                        <dt>County scope</dt>
+                        <dd>{{ license.county_name }}</dd>
+                    </div>
+                </dl>
+                <p><strong>Requirements:</strong> {{ license.requirements }}</p>
+            </article>
+        {% endfor %}
+
+        {% if not licenses %}
+            <article class="agency-card service-card">
+                <h3>No licensing services matched</h3>
+                <p>Try a permit type, county name, or keyword such as waste, emissions, wetland or impact.</p>
+                <a href="{{ url_for('licensing') }}">Show all licensing services</a>
+            </article>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

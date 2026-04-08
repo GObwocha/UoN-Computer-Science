@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}Licence Application{% endblock %}
+{% block content %}
+<section class="page-hero page-hero-narrow">
+    <div>
+        <p class="eyebrow">Online licensing</p>
+        <h1>Submit a licence application</h1>
+        <p>Use this service to submit a licence or permit application for review by the relevant national or county environmental office.</p>
+    </div>
+    <aside class="hero-briefing">
+        <p class="eyebrow">Application guidance</p>
+        <ul class="briefing-list">
+            <li>Select the permit or approval that matches your project or activity</li>
+            <li>Provide accurate project location, summary and supporting information</li>
+            <li>County-linked applications can be reviewed alongside national services where applicable</li>
+        </ul>
+    </aside>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Application form</p>
+            <h2>Request a permit or approval</h2>
+        </div>
+        <form action="{{ url_for('license_application') }}" method="post" class="agency-form">
+            {% if errors %}
+                <div class="validation-box">
+                    {% for error in errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-grid">
+                <div>
+                    <label for="applicant_name" class="form-label">Applicant name</label>
+                    <input id="applicant_name" name="applicant_name" class="form-control" value="{{ form_data.applicant_name }}">
+                </div>
+                <div>
+                    <label for="applicant_email" class="form-label">Applicant email</label>
+                    <input id="applicant_email" name="applicant_email" class="form-control" value="{{ form_data.applicant_email }}">
+                </div>
+                <div>
+                    <label for="organization_name" class="form-label">Organization or group</label>
+                    <input id="organization_name" name="organization_name" class="form-control" value="{{ form_data.organization_name }}">
+                </div>
+                <div>
+                    <label for="license_service_id" class="form-label">Licence service</label>
+                    <select id="license_service_id" name="license_service_id" class="form-select">
+                        <option value="">Select a service</option>
+                        {% for license in license_services %}
+                            <option value="{{ license.license_service_id }}" {% if form_data.license_service_id == license.license_service_id|string %}selected{% endif %}>
+                                {{ license.title }} ({{ license.category }} | {{ license.processing_window_days }} days)
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="project_county_id" class="form-label">Project county</label>
+                    <select id="project_county_id" name="project_county_id" class="form-select">
+                        <option value="">Select a county if applicable</option>
+                        {% for county in counties %}
+                            <option value="{{ county.county_id }}" {% if form_data.project_county_id == county.county_id|string %}selected{% endif %}>
+                                {{ county.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-span">
+                    <label for="project_location" class="form-label">Project location or site</label>
+                    <input id="project_location" name="project_location" class="form-control" value="{{ form_data.project_location }}">
+                </div>
+                <div class="form-span">
+                    <label for="project_summary" class="form-label">Project summary</label>
+                    <textarea id="project_summary" name="project_summary" rows="6" class="form-control">{{ form_data.project_summary }}</textarea>
+                </div>
+                <div class="form-span">
+                    <label for="supporting_documents" class="form-label">Supporting documents</label>
+                    <textarea id="supporting_documents" name="supporting_documents" rows="4" class="form-control">{{ form_data.supporting_documents }}</textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-agency">Submit application</button>
+        </form>
+    </div>
+
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Recent entries</p>
+            <h2>Latest submitted applications</h2>
+        </div>
+        <div class="timeline-list">
+            {% for application in recent_applications %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ application.submitted_at|date_label }} | {{ application.status }}</p>
+                    <h3>{{ application.license_title }}</h3>
+                    <p>{{ application.applicant_name }} | {{ application.organization_name }}</p>
+                    <span>{{ application.county_name }}</span>
+                </article>
+            {% endfor %}
+            {% if not recent_applications %}
+                <article class="agency-card">
+                    <h3>No recent applications available</h3>
+                    <p>Recent licensing activity will appear here when applications are submitted through the portal.</p>
+                    <a href="{{ url_for('licensing') }}">View licensing services</a>
+                </article>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

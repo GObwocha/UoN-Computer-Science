@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Service Guide{% endblock %}
+{% block content %}
+<section class="page-hero page-hero-narrow">
+    <div>
+        <p class="eyebrow">Service guide</p>
+        <h1>Using the public portal</h1>
+        <p>Find county offices, apply for permits, report environmental incidents and search agency records from one service platform.</p>
+    </div>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">County services</p>
+            <h2>Find local offices and county information</h2>
+        </div>
+        <div class="agency-card prose-card">
+            <p>Use the county directory to find office contacts, local environmental priorities, programs, notices, licensing support and research activity.</p>
+            <a href="{{ url_for('counties') }}">Browse county offices</a>
+        </div>
+    </div>
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Licensing</p>
+            <h2>Apply for permits and approvals</h2>
+        </div>
+        <div class="agency-card prose-card">
+            <p>Review licensing services, processing times and requirements, then submit an application through the online form.</p>
+            <a href="{{ url_for('license_application') }}">Open licence applications</a>
+        </div>
+    </div>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Incident reporting</p>
+            <h2>Report environmental hazards</h2>
+        </div>
+        <div class="agency-card prose-card">
+            <p>Use the incident desk to report pollution, flood risk, disaster events, wetland encroachment and other urgent environmental concerns.</p>
+            <a href="{{ url_for('incident_desk') }}">Open incident desk</a>
+        </div>
+    </div>
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Records search</p>
+            <h2>Search notices and published records</h2>
+        </div>
+        <div class="agency-card prose-card">
+            <p>Use records search to find related county information, licensing records, research updates, program summaries and published notices.</p>
+            <a href="{{ url_for('knowledge_search') }}">Open records search</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

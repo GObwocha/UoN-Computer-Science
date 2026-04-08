@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}County Directory{% endblock %}
+{% block content %}
+<section class="page-hero page-hero-narrow">
+    <div>
+        <p class="eyebrow">County offices</p>
+        <h1>County environment directory</h1>
+        <p>Search the 47-county directory by county name, region or ecosystem focus, then open each county page for programs, licensing support and research activity.</p>
+    </div>
+    <form class="search-panel" method="get">
+        <label for="county-search" class="form-label">Search counties</label>
+        <div class="search-row">
+            <input id="county-search" name="q" value="{{ search_term }}" class="form-control search-input" placeholder="Try Coast, Rift, forest or Nairobi">
+            <button type="submit" class="btn-agency">Search</button>
+        </div>
+    </form>
+</section>
+
+<section class="section-shell">
+    <div class="section-heading">
+        <p class="eyebrow">Results</p>
+        <h2>{{ counties|length }} county offices found</h2>
+        {% if search_term %}
+            <p>Filtered by "{{ search_term }}". <a href="{{ url_for('counties') }}">Clear search</a></p>
+        {% endif %}
+    </div>
+
+    <div class="card-grid">
+        {% for county in counties %}
+            <article class="agency-card county-card">
+                <div class="card-header-row">
+                    <div>
+                        <p class="card-meta">{{ county.region }}</p>
+                        <h3>{{ county.name }}</h3>
+                    </div>
+                    <span class="risk-badge risk-{{ county.risk_level|lower }}">{{ county.risk_level }}</span>
+                </div>
+                <p>{{ county.overview }}</p>
+                <dl class="county-facts">
+                    <div>
+                        <dt>HQ</dt>
+                        <dd>{{ county.headquarters }}</dd>
+                    </div>
+                    <div>
+                        <dt>Focus</dt>
+                        <dd>{{ county.ecosystem_focus }}</dd>
+                    </div>
+                    <div>
+                        <dt>Population</dt>
+                        <dd>{{ "{:,}".format(county.population_estimate) }}</dd>
+                    </div>
+                    <div>
+                        <dt>Programs</dt>
+                        <dd>{{ county.program_count }}</dd>
+                    </div>
+                </dl>
+                <a href="{{ url_for('county_details', county_id=county.county_id) }}">Open county page</a>
+            </article>
+        {% endfor %}
+
+        {% if not counties %}
+            <article class="agency-card county-card">
+                <h3>No counties matched</h3>
+                <p>Try a different region, county name, or ecosystem keyword.</p>
+                <a href="{{ url_for('counties') }}">Show all counties</a>
+            </article>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

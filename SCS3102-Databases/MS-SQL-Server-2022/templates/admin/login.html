@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Sign In</title>
+    <meta name="description" content="Administrator sign in for the Kenya Environment and County Services Agency internal dashboard.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body class="admin-login-body">
+    <main class="admin-login-shell">
+        <section class="admin-login-card">
+            <p class="eyebrow">Internal access</p>
+            <h1>Administrator sign in</h1>
+            <p class="admin-subtitle">Use your internal account to manage public notices, licences, incidents, records and monitoring activity. Sign-in details are not displayed on this page.</p>
+
+            {% if errors %}
+                <div class="validation-box">
+                    {% for error in errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if db_error %}
+                <div class="flash-card flash-error">{{ db_error }}</div>
+            {% endif %}
+
+            <form class="agency-form" method="post">
+                {% if next_path %}
+                    <input type="hidden" name="next" value="{{ next_path }}">
+                {% endif %}
+
+                <div>
+                    <label class="form-label" for="identifier">Username or email</label>
+                    <input class="form-control" id="identifier" name="identifier" type="text" value="{{ form_data.identifier }}" autocomplete="username">
+                </div>
+
+                <div>
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" autocomplete="current-password">
+                </div>
+
+                <button class="btn-agency" type="submit">Sign in</button>
+            </form>
+
+            <a class="admin-back-link" href="{{ url_for('home') }}">Return to public portal</a>
+        </section>
+    </main>
+</body>
+</html>

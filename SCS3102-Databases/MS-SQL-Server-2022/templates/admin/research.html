@@ -1,0 +1,127 @@
+{% extends "admin/base.html" %}
+{% block title %}Research Management{% endblock %}
+{% block admin_heading %}Research management{% endblock %}
+{% block admin_intro %}Create and maintain studies, field activities and public-facing monitoring work.{% endblock %}
+{% block content %}
+<section class="admin-status-row">
+    {% for item in status_summary %}
+        <article class="admin-status-card">
+            <span>{{ item.status }}</span>
+            <strong>{{ item.status_count }}</strong>
+        </article>
+    {% endfor %}
+    {% if not status_summary %}
+        <article class="admin-status-card">
+            <span>No research data available</span>
+            <strong>0</strong>
+        </article>
+    {% endif %}
+</section>
+
+<section class="admin-grid-two">
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Research setup</p>
+            <h2>Create a research activity</h2>
+        </div>
+        {% if research_errors %}
+            <div class="validation-box">
+                {% for error in research_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form class="agency-form" action="{{ url_for('admin.create_research') }}" method="post">
+            <div class="form-grid">
+                <div>
+                    <label class="form-label" for="research_county_id">County</label>
+                    <select class="form-select" id="research_county_id" name="county_id">
+                        <option value="">National research</option>
+                        {% for county in counties %}
+                            <option value="{{ county.county_id }}" {% if research_form_data.county_id == county.county_id|string %}selected{% endif %}>{{ county.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label" for="research_status">Status</label>
+                    <select class="form-select" id="research_status" name="status">
+                        {% for status in research_statuses %}
+                            <option value="{{ status }}" {% if research_form_data.status == status %}selected{% endif %}>{{ status }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="research_title">Title</label>
+                    <input class="form-control" id="research_title" name="title" type="text" value="{{ research_form_data.title }}">
+                </div>
+                <div>
+                    <label class="form-label" for="research_theme">Theme</label>
+                    <input class="form-control" id="research_theme" name="research_theme" type="text" value="{{ research_form_data.research_theme }}">
+                </div>
+                <div>
+                    <label class="form-label" for="research_start_date">Start date</label>
+                    <input class="form-control" id="research_start_date" name="start_date" type="date" value="{{ research_form_data.start_date }}">
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="research_lead_office">Lead office</label>
+                    <input class="form-control" id="research_lead_office" name="lead_office" type="text" value="{{ research_form_data.lead_office }}">
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="research_summary">Summary</label>
+                    <textarea id="research_summary" name="summary" rows="3">{{ research_form_data.summary }}</textarea>
+                </div>
+                <div class="form-span">
+                    <label class="form-label" for="research_outputs">Expected outputs</label>
+                    <textarea id="research_outputs" name="outputs" rows="3">{{ research_form_data.outputs }}</textarea>
+                </div>
+                <div class="admin-checkbox-row">
+                    <label><input type="checkbox" name="is_featured" {% if research_form_data.is_featured %}checked{% endif %}> Feature on public pages</label>
+                </div>
+            </div>
+            <button class="btn-agency" type="submit">Create research activity</button>
+        </form>
+    </article>
+
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Research register</p>
+            <h2>Current activities</h2>
+        </div>
+        <div class="admin-card-stack">
+            {% for activity in research_activities %}
+                <article class="admin-record-card">
+                    <div class="admin-record-header">
+                        <div>
+                            <p class="card-meta">{{ activity.start_date|date_label }} | {{ activity.research_theme }}</p>
+                            <h3>{{ activity.title }}</h3>
+                        </div>
+                        <span class="county-pill">{{ activity.status }}</span>
+                    </div>
+                    <p><strong>County:</strong> {{ activity.county_name }}</p>
+                    <p><strong>Lead office:</strong> {{ activity.lead_office }}</p>
+                    <p><strong>Outputs:</strong> {{ activity.outputs }}</p>
+                    <form class="agency-form admin-inline-form" action="{{ url_for('admin.update_research', research_activity_id=activity.research_activity_id) }}" method="post">
+                        <div class="form-grid">
+                            <div>
+                                <label class="form-label" for="research_status_{{ activity.research_activity_id }}">Status</label>
+                                <select class="form-select" id="research_status_{{ activity.research_activity_id }}" name="status">
+                                    {% for status in research_statuses %}
+                                        <option value="{{ status }}" {% if activity.status == status %}selected{% endif %}>{{ status }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="admin-checkbox-row">
+                                <label><input type="checkbox" name="is_featured" {% if activity.is_featured %}checked{% endif %}> Featured</label>
+                            </div>
+                        </div>
+                        <button class="btn-agency" type="submit">Save research update</button>
+                    </form>
+                </article>
+            {% endfor %}
+            {% if not research_activities %}
+                <p class="admin-empty">No research activities have been created yet.</p>
+            {% endif %}
+        </div>
+    </article>
+</section>
+{% endblock %}

@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+{% block title %}Kenya Environment and County Services Agency{% endblock %}
+{% block content %}
+<section class="hero-panel">
+    <div class="hero-copy">
+        <p class="eyebrow">Public information, licensing and environmental response</p>
+        <h1>Kenya Environment and County Services Agency</h1>
+        <p class="hero-intro">
+            Access county environment offices, licensing services, national notices, research updates and incident reporting
+            from one public service portal.
+        </p>
+        <div class="hero-actions">
+            <a class="btn-agency" href="{{ url_for('counties') }}">Find county offices</a>
+            <a class="btn-agency btn-agency-secondary" href="{{ url_for('license_application') }}">Apply for a licence</a>
+            <a class="btn-agency btn-agency-secondary" href="{{ url_for('incident_desk') }}">Report an incident</a>
+        </div>
+        <dl class="metric-strip">
+            <div>
+                <dt>County offices</dt>
+                <dd>{{ county_count }}</dd>
+            </div>
+            <div>
+                <dt>Response locations</dt>
+                <dd>{{ response_location_count }}</dd>
+            </div>
+            <div>
+                <dt>Licensing services</dt>
+                <dd>{{ license_count }}</dd>
+            </div>
+            <div>
+                <dt>Research activities</dt>
+                <dd>{{ research_activity_count }}</dd>
+            </div>
+            <div>
+                <dt>Active programs</dt>
+                <dd>{{ program_count }}</dd>
+            </div>
+            <div>
+                <dt>Cases logged</dt>
+                <dd>{{ incident_count }}</dd>
+            </div>
+            <div>
+                <dt>Latest update</dt>
+                <dd>{{ latest_updates[0].publish_date|date_label if latest_updates else "Pending refresh" }}</dd>
+            </div>
+        </dl>
+    </div>
+    <aside class="hero-briefing">
+        <p class="eyebrow">Service centre</p>
+        <h2>Public access channels</h2>
+        <ul class="briefing-list">
+            <li>County office directory for local environmental contacts and priorities</li>
+            <li>Online licensing applications for permits and approvals</li>
+            <li>National and county notices on flood risk, restoration and compliance</li>
+            <li>Incident desk for pollution, disaster and environmental hazard reporting</li>
+        </ul>
+    </aside>
+</section>
+
+<section class="section-shell">
+    <div class="section-heading">
+        <p class="eyebrow">Services</p>
+        <h2>Popular services and records</h2>
+    </div>
+    <div class="card-grid card-grid-services">
+        {% for service in quick_services %}
+            <article class="agency-card service-card">
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+                {% if service.controller == 'Counties' %}
+                    <a href="{{ url_for('counties', q=service.search_term) }}">Open service</a>
+                {% elif service.controller == 'Licensing' %}
+                    <a href="{{ url_for('licensing', q=service.search_term) }}">Open service</a>
+                {% elif service.controller == 'LicenseApplications' %}
+                    <a href="{{ url_for('license_application') }}">Open service</a>
+                {% elif service.controller == 'Research' %}
+                    <a href="{{ url_for('research', q=service.search_term) }}">Open service</a>
+                {% elif service.controller == 'KnowledgeSearch' %}
+                    <a href="{{ url_for('knowledge_search') }}">Open service</a>
+                {% elif service.controller == 'IncidentDesk' %}
+                    <a href="{{ url_for('incident_desk') }}">Open service</a>
+                {% else %}
+                    <a href="{{ url_for('database_guide') }}">Open service</a>
+                {% endif %}
+            </article>
+        {% endfor %}
+        {% if not quick_services %}
+            <article class="agency-card service-card">
+                <h3>Service information unavailable</h3>
+                <p>Service information will appear here when the portal becomes available again.</p>
+                <a href="{{ url_for('database_guide') }}">Open service guide</a>
+            </article>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Notices</p>
+            <h2>Priority national updates</h2>
+        </div>
+        <div class="card-grid">
+            {% for update in featured_updates %}
+                <article class="agency-card feature-card">
+                    <p class="card-meta">{{ update.publish_date|date_label("%d %B %Y") }} | {{ update.category }}</p>
+                    <h3>{{ update.title }}</h3>
+                    <p>{{ update.summary }}</p>
+                    <span class="county-pill">{{ update.county_name }}</span>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Latest</p>
+            <h2>Recent agency notices</h2>
+        </div>
+        <div class="timeline-list">
+            {% for update in latest_updates %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ update.publish_date|date_label }} | {{ update.category }}</p>
+                    <h3>{{ update.title }}</h3>
+                    <p>{{ update.summary }}</p>
+                    <span>{{ update.county_name }}</span>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Licensing</p>
+            <h2>Key approvals and permits</h2>
+        </div>
+        <div class="card-grid">
+            {% for license in license_highlights %}
+                <article class="agency-card service-card">
+                    <p class="card-meta">{{ license.category }} | {{ license.county_name }}</p>
+                    <h3>{{ license.title }}</h3>
+                    <p>{{ license.summary }}</p>
+                    <dl class="county-facts">
+                        <div>
+                            <dt>Processing</dt>
+                            <dd>{{ license.processing_window_days }} days</dd>
+                        </div>
+                        <div>
+                            <dt>Fee</dt>
+                            <dd>KES {{ "{:,.0f}".format(license.fee_ksh) }}</dd>
+                        </div>
+                    </dl>
+                    <p><strong>Applies to:</strong> {{ license.applies_to }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Research</p>
+            <h2>Current studies and monitoring</h2>
+        </div>
+        <div class="timeline-list">
+            {% for activity in research_highlights %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ activity.start_date|date_label }} | {{ activity.research_theme }}</p>
+                    <h3>{{ activity.title }}</h3>
+                    <p>{{ activity.summary }}</p>
+                    <span>{{ activity.county_name }} | {{ activity.status }}</span>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section-shell county-highlight-shell">
+    <div class="section-heading">
+        <p class="eyebrow">County Directory</p>
+        <h2>County coverage and local priorities</h2>
+        <p>Browse county profiles for contacts, regional priorities, programs, notices, licensing support and research activity.</p>
+    </div>
+    <div class="card-grid">
+        {% for county in county_highlights %}
+            <article class="agency-card county-card">
+                <div class="card-header-row">
+                    <div>
+                        <p class="card-meta">{{ county.region }}</p>
+                        <h3>{{ county.name }}</h3>
+                    </div>
+                    <span class="risk-badge risk-{{ county.risk_level|lower }}">{{ county.risk_level }} risk</span>
+                </div>
+                <p>{{ county.overview }}</p>
+                <dl class="county-facts">
+                    <div>
+                        <dt>HQ</dt>
+                        <dd>{{ county.headquarters }}</dd>
+                    </div>
+                    <div>
+                        <dt>Focus</dt>
+                        <dd>{{ county.ecosystem_focus }}</dd>
+                    </div>
+                    <div>
+                        <dt>Programs</dt>
+                        <dd>{{ county.program_count }}</dd>
+                    </div>
+                </dl>
+                <a href="{{ url_for('county_details', county_id=county.county_id) }}">View county profile</a>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">National priorities</p>
+            <h2>Operational focus areas</h2>
+        </div>
+        <div class="agency-card prose-card">
+            <p>The agency coordinates county and national action across environmental management, restoration and emergency response.</p>
+            <ul class="briefing-list">
+                <li>Air and water quality compliance in urban, industrial and lake-basin areas</li>
+                <li>Wetland, shoreline, forest and dryland ecosystem protection</li>
+                <li>Public licensing, environmental review and permit administration</li>
+                <li>Disaster readiness, flood reporting and cross-county coordination</li>
+            </ul>
+            <a href="{{ url_for('research') }}">View research and monitoring activity</a>
+        </div>
+    </div>
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Programs</p>
+            <h2>Current field initiatives</h2>
+        </div>
+        <div class="card-grid">
+            {% for program in featured_programs %}
+                <article class="agency-card program-card">
+                    <p class="card-meta">{{ program.county_name }} | {{ program.status }}</p>
+                    <h3>{{ program.title }}</h3>
+                    <p>{{ program.summary }}</p>
+                    <dl class="county-facts">
+                        <div>
+                            <dt>Budget</dt>
+                            <dd>KES {{ "{:,.1f}".format(program.budget_millions) }} M</dd>
+                        </div>
+                        <div>
+                            <dt>Reach</dt>
+                            <dd>{{ "{:,}".format(program.beneficiaries) }} people</dd>
+                        </div>
+                    </dl>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

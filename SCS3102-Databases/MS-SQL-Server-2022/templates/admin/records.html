@@ -1,0 +1,100 @@
+{% extends "admin/base.html" %}
+{% block title %}Records Management{% endblock %}
+{% block admin_heading %}Records management{% endblock %}
+{% block admin_intro %}Monitor indexed knowledge records and refresh the public search dataset when content changes.{% endblock %}
+{% block content %}
+<section class="admin-kpi-grid">
+    <article class="admin-kpi-card">
+        <span>Documents</span>
+        <strong>{{ summary.document_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Indexed values</span>
+        <strong>{{ summary.index_row_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Vector dimensions</span>
+        <strong>{{ summary.dimension_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Last refresh</span>
+        <strong>{{ summary.last_indexed_at|date_label("%d %b %Y %H:%M") if summary.last_indexed_at else "Not yet run" }}</strong>
+    </article>
+</section>
+
+<section class="agency-card">
+    <div class="admin-action-bar">
+        <div>
+            <p class="eyebrow">Index operations</p>
+            <h2>Refresh search records</h2>
+        </div>
+        <form action="{{ url_for('admin.rebuild_records') }}" method="post">
+            <button class="btn-agency" type="submit">Rebuild records index</button>
+        </form>
+    </div>
+</section>
+
+<section class="admin-grid-two">
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Sources</p>
+            <h2>Indexed document groups</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Documents</th>
+                        <th>Last indexed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in source_counts %}
+                        <tr>
+                            <td>{{ item.source_type }}</td>
+                            <td>{{ item.document_count }}</td>
+                            <td>{{ item.last_indexed_at|date_label("%d %b %Y %H:%M") if item.last_indexed_at else "Not available" }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% if not source_counts %}
+                        <tr><td colspan="3">No indexed documents available yet.</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Documents</p>
+            <h2>Recent indexed records</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Source</th>
+                        <th>County</th>
+                        <th>Tokens</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for document in recent_documents %}
+                        <tr>
+                            <td>{{ document.title }}</td>
+                            <td>{{ document.source_type }}</td>
+                            <td>{{ document.county_name }}</td>
+                            <td>{{ document.token_count }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% if not recent_documents %}
+                        <tr><td colspan="4">No indexed documents available yet.</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+{% endblock %}

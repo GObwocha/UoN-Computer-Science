@@ -1,0 +1,306 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 6 /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+6 0 obj
+<< /Length 3247 >>
+stream
+BT /F2 20 Tf 1 0 0 1 52 782 Tm (Kenya Environment Portal Project Report) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 742 Tm (1. Project Title) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 717 Tm (Kenya Environment and County Services Agency Portal) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 694 Tm (2. Project Summary) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 669 Tm (This project is a Flask-based web portal designed to present environmental public) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 654 Tm (services for Kenya in a realistic government-agency style. The system covers all 47) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 639 Tm (counties, includes a national disaster coordination location, supports licensing) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 624 Tm (services, research activity, public incident reporting, records search, and an internal) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 609 Tm (administrator dashboard.) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 586 Tm (The project was built so that:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 571 Tm (- the public can access county environmental information) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 556 Tm (- users can submit licence applications) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 541 Tm (- users can report environmental incidents) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 526 Tm (- staff can manage content and monitor the public portal) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 511 Tm (- SQL Server can be used as the main database and assessed through SSMS 22) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 488 Tm (3. Main Objectives) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 463 Tm (The main objectives of the project were:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 448 Tm (1. Build a realistic public-facing environmental agency portal for Kenya.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 433 Tm (2. Include all 47 counties and a national coordination location.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 418 Tm (3. Use Flask and Jinja templates for the website.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 403 Tm (4. Use SQL Server as the backend database.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 388 Tm (5. Demonstrate practical SQL Server usage including tables, joins, inserts,) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 373 Tm (   updates, indexing, functions, procedures, and authentication storage.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 358 Tm (6. Add an internal administrator dashboard for operations and management.) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 335 Tm (4. Technologies Used) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 310 Tm (- Python) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 295 Tm (- Flask) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 280 Tm (- Jinja2 templates) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 265 Tm (- HTML5) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 250 Tm (- CSS3) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 235 Tm (- JavaScript) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 220 Tm (- SQL Server) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 205 Tm (- SSMS 22) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 190 Tm (- pyodbc) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 175 Tm (- werkzeug.security) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 160 Tm (- VS Code) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 137 Tm (5. Project Structure) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 112 Tm (Important project files:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 97 Tm (- app.py: main public Flask routes) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 82 Tm (- admin_portal.py: administrator dashboard routes and authentication logic) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 67 Tm (- repository.py: all database access logic) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3264 >>
+stream
+BT /F1 11 Tf 1 0 0 1 58 782 Tm (- config.py: application configuration and SQL Server connection string) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 767 Tm (- create_admin_user.py: local script for creating or updating administrator) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 752 Tm (  accounts) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 737 Tm (- database/CreateKenyaEnvironmentPortal.sql: complete SQL Server setup script) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 722 Tm (- templates/: public pages) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 707 Tm (- templates/admin/: administrator pages) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 692 Tm (- static/css/site.css: public and admin styling) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 669 Tm (6. Step-by-Step Development Report) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 636 Tm (Step 1: Project planning) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 617 Tm (The system was first planned as a Kenya-specific replacement for a government) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 602 Tm (environment-agency style site. The public side had to feel realistic, formal, and) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 587 Tm (suitable for a school project while still showing clear database use.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 564 Tm (Step 2: Choosing the backend stack) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 545 Tm (The implementation was changed from ASP.NET to Python Flask so the project could run) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 530 Tm (more simply in VS Code. Flask was selected because it provides:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 515 Tm (- lightweight routing) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 500 Tm (- easy Jinja template rendering) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 485 Tm (- simple form handling) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 470 Tm (- straightforward integration with SQL Server through pyodbc) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 447 Tm (Step 3: Designing the public portal) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 428 Tm (The public portal was organized around the main service areas:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 413 Tm (- Home) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 398 Tm (- Counties) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 383 Tm (- Licensing) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 368 Tm (- Research) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 353 Tm (- Records Search) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 338 Tm (- Incident Desk) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 323 Tm (- Service Guide) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 300 Tm (The text and layout were adjusted to look like a real public service system instead of a) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 285 Tm (technical demo.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 262 Tm (Step 4: Building county coverage) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 243 Tm (The system was expanded to include all 47 Kenyan counties. Each county record stores:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 228 Tm (- county name) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 213 Tm (- region) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 198 Tm (- headquarters) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 183 Tm (- population estimate) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 168 Tm (- area) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 153 Tm (- ecosystem focus) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 138 Tm (- risk level) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 123 Tm (- overview) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 108 Tm (- phone) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 93 Tm (- email) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 70 Tm (County profiles were then linked to programs, updates, licensing services, and research) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 3349 >>
+stream
+BT /F1 11 Tf 1 0 0 1 52 782 Tm (activities.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 759 Tm (Step 5: Adding response locations) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 740 Tm (Each county received a response location called a county environment office. A national) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 725 Tm (response location was also added:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 710 Tm (- National Disaster Coordination Centre) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 687 Tm (This allowed the incident-reporting system to support both county-level and) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 672 Tm (national-level response handling.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 649 Tm (Step 6: Implementing licensing) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 630 Tm (Licensing services were added to show environmental permits and approvals. A public) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 615 Tm (application form was created so users can submit:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 600 Tm (- applicant information) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 585 Tm (- county) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 570 Tm (- project location) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 555 Tm (- project summary) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 540 Tm (- supporting documents) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 517 Tm (Applications are saved to the database for review.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 494 Tm (Step 7: Implementing research activities) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 475 Tm (Research activities were introduced to make the portal more realistic and to show) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 460 Tm (monitoring and field-study records. These records include:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 445 Tm (- research title) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 430 Tm (- theme) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 415 Tm (- status) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 400 Tm (- lead office) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 385 Tm (- start date) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 370 Tm (- outputs) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 355 Tm (- county link) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 332 Tm (Step 8: Implementing records search) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 313 Tm (A records search page was created so the portal could search across published content.) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 298 Tm (The search system uses database-backed normalized records and a similarity index to) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 283 Tm (search county profiles, programs, research activities, licensing services, and updates.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 260 Tm (Step 9: Adding normalization and similarity indexing) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 241 Tm (The project includes a structured indexing pipeline backed by SQL Server. Public content) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 226 Tm (is normalized, inserted into KnowledgeDocuments, and indexed in KnowledgeVectorIndex.) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 211 Tm (This allows a similarity-style search experience from the records page.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 188 Tm (Step 10: Building the incident desk) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 169 Tm (The incident desk allows users to report environmental problems such as:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 154 Tm (- illegal dumping) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 139 Tm (- flood risk) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 124 Tm (- water contamination) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 109 Tm (- disaster response issues) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 86 Tm (Reports are saved into the database with a status field for staff review.) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 3357 >>
+stream
+BT /F2 13 Tf 1 0 0 1 52 782 Tm (Step 11: Improving realism of the public interface) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 763 Tm (The public pages were refined so that:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 748 Tm (- technical SQL explanations were removed from user-facing pages) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 733 Tm (- the homepage became more service-focused) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 718 Tm (- the footer was replaced with realistic contact details) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 703 Tm (- public language became more formal and real-world) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 680 Tm (Step 12: Adding the administrator dashboard) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 661 Tm (An internal dashboard was created under /admin/login. This introduced a separate) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 646 Tm (operations area for:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 631 Tm (- dashboard overview) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 616 Tm (- content management) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 601 Tm (- incident management) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 586 Tm (- licensing management) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 571 Tm (- records management) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 556 Tm (- research management) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 541 Tm (- public-page monitoring) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 526 Tm (- activity logging) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 503 Tm (Step 13: Adding SQL-backed administrator authentication) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 484 Tm (Administrator login was implemented using SQL Server. Usernames, emails, roles, and) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 469 Tm (hashed passwords are stored in the AdminUsers table. The login page does not display) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 454 Tm (credentials. Session-based authentication protects all administrator routes.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 431 Tm (Step 14: Adding audit logging) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 412 Tm (The system records administrator actions in AdminActivityLog. This captures:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 397 Tm (- login events) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 382 Tm (- logout events) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 367 Tm (- content creation) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 352 Tm (- incident updates) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 337 Tm (- licence updates) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 322 Tm (- research updates) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 307 Tm (- records-index rebuilds) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 284 Tm (Step 15: Adding local admin account setup) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 265 Tm (A helper script called create_admin_user.py was added so a new administrator account can) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 250 Tm (be created or updated locally from the terminal without exposing credentials in any HTML) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 235 Tm (page.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 212 Tm (Step 16: Styling the admin interface) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 193 Tm (The admin section was given its own internal-dashboard layout with:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 178 Tm (- left navigation) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 163 Tm (- operation cards) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 148 Tm (- management forms) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 133 Tm (- monitoring tables) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 118 Tm (- audit views) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 95 Tm (This helps distinguish staff functions from the public portal.) Tj ET
+BT /F2 13 Tf 1 0 0 1 52 72 Tm (Step 17: Verification and checks) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 3484 >>
+stream
+BT /F1 11 Tf 1 0 0 1 52 782 Tm (The project was checked by:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 767 Tm (- compiling Python files with py_compile) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 752 Tm (- loading all admin templates successfully) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 737 Tm (- confirming public and admin routes were registered) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 722 Tm (- confirming protected admin routes redirect to login when not signed in) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 699 Tm (7. Main Features Delivered) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 674 Tm (- 47 Kenyan county profiles) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 659 Tm (- National disaster coordination location) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 644 Tm (- Public licensing service listing) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 629 Tm (- Public licence application form) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 614 Tm (- Public research listing) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 599 Tm (- Public incident reporting form) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 584 Tm (- Records similarity search) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 569 Tm (- Service guide page) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 554 Tm (- SQL-backed administrator login) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 539 Tm (- Admin dashboard and management sections) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 524 Tm (- Admin activity logging) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 509 Tm (- Local admin-user creation script) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 486 Tm (8. How the System Works) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 461 Tm (1. The user opens the Flask application in the browser.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 446 Tm (2. Public routes call repository.py to request data from SQL Server.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 431 Tm (3. SQL results are returned to Flask as dictionaries.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 416 Tm (4. Jinja templates render the data into public pages.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 401 Tm (5. Public forms submit data back to Flask.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 386 Tm (6. Flask validates the form input.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 371 Tm (7. Valid records are inserted into SQL Server.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 356 Tm (8. Administrator users sign in through the SQL-backed login route.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 341 Tm (9. The admin dashboard reads, updates, and manages the same database records.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 326 Tm (10. Important admin actions are logged in the audit table.) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 303 Tm (9. Deployment / Running Steps) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 278 Tm (1. Open the project in VS Code.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 263 Tm (2. Ensure the Python virtual environment is selected.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 248 Tm (3. Run the SQL script in SSMS 22:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 233 Tm (- database/CreateKenyaEnvironmentPortal.sql) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 218 Tm (4. Check the SQL Server connection string in config.py.) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 203 Tm (5. Start the app:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 188 Tm (- .\\.venv\\Scripts\\python.exe app.py) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 173 Tm (6. Open the public portal:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 158 Tm (- http://127.0.0.1:5000) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 143 Tm (7. Open the admin portal:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 128 Tm (- http://127.0.0.1:5000/admin/login) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 113 Tm (8. Create or update your admin account if needed:) Tj ET
+BT /F1 11 Tf 1 0 0 1 58 98 Tm (- .\\.venv\\Scripts\\python.exe create_admin_user.py) Tj ET
+BT /F2 16 Tf 1 0 0 1 52 75 Tm (10. Conclusion) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Length 447 >>
+stream
+BT /F1 11 Tf 1 0 0 1 52 782 Tm (The project successfully combines a realistic Kenya public environmental portal with a) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 767 Tm (strong SQL Server backend and a protected internal admin dashboard. It demonstrates both) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 752 Tm (web development and database usage in a way that is suitable for a school project and) Tj ET
+BT /F1 11 Tf 1 0 0 1 52 737 Tm (practical SSMS 22 assessment.) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 16 0 R >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000155 00000 n 
+0000000225 00000 n 
+0000000300 00000 n 
+0000000368 00000 n 
+0000003667 00000 n 
+0000003813 00000 n 
+0000007129 00000 n 
+0000007275 00000 n 
+0000010677 00000 n 
+0000010825 00000 n 
+0000014235 00000 n 
+0000014383 00000 n 
+0000017920 00000 n 
+0000018068 00000 n 
+0000018567 00000 n 
+trailer
+<< /Size 18 /Root 1 0 R >>
+startxref
+18715
+%%EOF

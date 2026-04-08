@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Incident Desk{% endblock %}
+{% block content %}
+<section class="page-hero page-hero-narrow">
+    <div>
+        <p class="eyebrow">Public reporting</p>
+        <h1>Incident desk</h1>
+        <p>Report a county or national environmental issue for review by the responsible office or national coordination desk.</p>
+    </div>
+    <aside class="hero-briefing">
+        <p class="eyebrow">When to use this service</p>
+        <ul class="briefing-list">
+            <li>Pollution, illegal dumping, wetland encroachment and water contamination</li>
+            <li>Flood alerts, disaster response and urgent cross-county environmental incidents</li>
+            <li>Reports routed through all 47 county offices and the national coordination location</li>
+        </ul>
+    </aside>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Guidance</p>
+            <h2>What reporters should include</h2>
+        </div>
+        <div class="agency-card prose-card">
+            <ul class="briefing-list">
+                <li>Choose the county office or the national disaster coordination centre</li>
+                <li>Enter the exact incident place and nearest landmark</li>
+                <li>What happened and when it was seen</li>
+                <li>Whether people, water points or wildlife are affected</li>
+                <li>Enough detail for county officers to verify the case</li>
+            </ul>
+            <a href="{{ url_for('counties') }}">View county offices</a>
+        </div>
+    </div>
+
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Form</p>
+            <h2>Submit an incident</h2>
+        </div>
+        <form action="{{ url_for('incident_desk') }}" method="post" class="agency-form">
+            {% if errors %}
+                <div class="validation-box">
+                    {% for error in errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-grid">
+                <div>
+                    <label for="reporter_name" class="form-label">Full name</label>
+                    <input id="reporter_name" name="reporter_name" class="form-control" value="{{ form_data.reporter_name }}">
+                </div>
+                <div>
+                    <label for="reporter_email" class="form-label">Email address</label>
+                    <input id="reporter_email" name="reporter_email" class="form-control" value="{{ form_data.reporter_email }}">
+                </div>
+                <div>
+                    <label for="response_location_id" class="form-label">Handling office or response location</label>
+                    <select id="response_location_id" name="response_location_id" class="form-select">
+                        <option value="">Select a location</option>
+                        {% for location in response_locations %}
+                            <option value="{{ location.response_location_id }}" {% if form_data.response_location_id == location.response_location_id|string %}selected{% endif %}>
+                                {{ location.location_name }} ({{ location.location_type }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="category" class="form-label">Category</label>
+                    <select id="category" name="category" class="form-select">
+                        <option value="">Select a category</option>
+                        {% for category in categories %}
+                            <option value="{{ category }}" {% if form_data.category == category %}selected{% endif %}>{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-span">
+                    <label for="location" class="form-label">Incident place or landmark</label>
+                    <input id="location" name="location" class="form-control" value="{{ form_data.location }}">
+                </div>
+                <div class="form-span">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" name="description" rows="6" class="form-control">{{ form_data.description }}</textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-agency">Submit incident report</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

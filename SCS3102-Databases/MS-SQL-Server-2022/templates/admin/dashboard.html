@@ -1,0 +1,123 @@
+{% extends "admin/base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block admin_heading %}Operations dashboard{% endblock %}
+{% block admin_intro %}Track workload, recent publishing activity and internal actions from one place.{% endblock %}
+{% block content %}
+<section class="admin-kpi-grid">
+    <article class="admin-kpi-card">
+        <span>Public notices</span>
+        <strong>{{ metrics.update_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Programs</span>
+        <strong>{{ metrics.program_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Research activities</span>
+        <strong>{{ metrics.research_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Licensing services</span>
+        <strong>{{ metrics.license_service_count }}</strong>
+    </article>
+    <article class="admin-kpi-card admin-kpi-alert">
+        <span>Incident backlog</span>
+        <strong>{{ metrics.incident_backlog_count }}</strong>
+    </article>
+    <article class="admin-kpi-card admin-kpi-alert">
+        <span>Licensing backlog</span>
+        <strong>{{ metrics.licensing_backlog_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Indexed records</span>
+        <strong>{{ metrics.knowledge_document_count }}</strong>
+    </article>
+    <article class="admin-kpi-card">
+        <span>Active admins</span>
+        <strong>{{ metrics.active_admin_count }}</strong>
+    </article>
+</section>
+
+<section class="admin-grid-two">
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Publishing</p>
+            <h2>Recent public notices</h2>
+        </div>
+        <div class="timeline-list">
+            {% for update in recent_updates %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ update.publish_date|date_label }} | {{ update.category }}</p>
+                    <h3>{{ update.title }}</h3>
+                    <p>{{ update.county_name }}{% if update.is_featured %} | Featured{% endif %}</p>
+                </article>
+            {% endfor %}
+            {% if not recent_updates %}
+                <p class="admin-empty">No notices available yet.</p>
+            {% endif %}
+        </div>
+    </article>
+
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Response queue</p>
+            <h2>Recent incident reports</h2>
+        </div>
+        <div class="timeline-list">
+            {% for incident in recent_incidents %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ incident.reported_at|date_label("%d %b %Y %H:%M") }} | {{ incident.status }}</p>
+                    <h3>{{ incident.category }}</h3>
+                    <p>{{ incident.location }}</p>
+                    <span>{{ incident.county_name }} | {{ incident.response_location_name }}</span>
+                </article>
+            {% endfor %}
+            {% if not recent_incidents %}
+                <p class="admin-empty">No incidents available yet.</p>
+            {% endif %}
+        </div>
+    </article>
+</section>
+
+<section class="admin-grid-two">
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Licensing</p>
+            <h2>Recent applications</h2>
+        </div>
+        <div class="timeline-list">
+            {% for application in recent_applications %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ application.submitted_at|date_label("%d %b %Y %H:%M") }} | {{ application.status }}</p>
+                    <h3>{{ application.license_title }}</h3>
+                    <p>{{ application.applicant_name }}</p>
+                    <span>{{ application.county_name }}</span>
+                </article>
+            {% endfor %}
+            {% if not recent_applications %}
+                <p class="admin-empty">No licence applications available yet.</p>
+            {% endif %}
+        </div>
+    </article>
+
+    <article class="agency-card">
+        <div class="section-heading">
+            <p class="eyebrow">Audit</p>
+            <h2>Recent admin activity</h2>
+        </div>
+        <div class="timeline-list">
+            {% for activity in recent_activity %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ activity.occurred_at|date_label("%d %b %Y %H:%M") }} | {{ activity.activity_type }}</p>
+                    <h3>{{ activity.entity_type }}</h3>
+                    <p>{{ activity.description }}</p>
+                    <span>{{ activity.admin_name }}</span>
+                </article>
+            {% endfor %}
+            {% if not recent_activity %}
+                <p class="admin-empty">Activity logs will appear here after the first administrator action.</p>
+            {% endif %}
+        </div>
+    </article>
+</section>
+{% endblock %}

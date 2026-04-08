@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block title %}County Details{% endblock %}
+{% block content %}
+{% if county %}
+<section class="page-hero">
+    <div>
+        <p class="eyebrow">{{ county.region }} region</p>
+        <h1>{{ county.name }} County</h1>
+        <p>{{ county.overview }}</p>
+    </div>
+    <aside class="hero-briefing">
+        <p class="eyebrow">County contact</p>
+        <h2>{{ county.headquarters }} office</h2>
+        <p>Email: {{ county.contact_email }}</p>
+        <p>Phone: {{ county.contact_phone }}</p>
+        <p>Main focus: {{ county.ecosystem_focus }}</p>
+    </aside>
+</section>
+
+<section class="section-shell">
+    <div class="facts-grid">
+        <article class="agency-card">
+            <p class="card-meta">Population estimate</p>
+            <h3>{{ "{:,}".format(county.population_estimate) }}</h3>
+        </article>
+        <article class="agency-card">
+            <p class="card-meta">Area</p>
+            <h3>{{ "{:,.1f}".format(county.area_sq_km) }} km2</h3>
+        </article>
+        <article class="agency-card">
+            <p class="card-meta">Risk level</p>
+            <h3>{{ county.risk_level }}</h3>
+        </article>
+        <article class="agency-card">
+            <p class="card-meta">Priority ecosystem</p>
+            <h3>{{ county.ecosystem_focus }}</h3>
+        </article>
+    </div>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Programs</p>
+            <h2>County interventions</h2>
+        </div>
+        <div class="card-grid">
+            {% for program in county.programs %}
+                <article class="agency-card program-card">
+                    <p class="card-meta">{{ program.status }}</p>
+                    <h3>{{ program.title }}</h3>
+                    <p>{{ program.summary }}</p>
+                    <dl class="county-facts">
+                        <div>
+                            <dt>Budget</dt>
+                            <dd>KES {{ "{:,.1f}".format(program.budget_millions) }} M</dd>
+                        </div>
+                        <div>
+                            <dt>Reach</dt>
+                            <dd>{{ "{:,}".format(program.beneficiaries) }}</dd>
+                        </div>
+                    </dl>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Updates</p>
+            <h2>Recent notices affecting {{ county.name }}</h2>
+        </div>
+        <div class="timeline-list">
+            {% for update in county.updates %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ update.publish_date|date_label }} | {{ update.category }}</p>
+                    <h3>{{ update.title }}</h3>
+                    <p>{{ update.summary }}</p>
+                    <span>{{ update.county_name }}</span>
+                </article>
+            {% endfor %}
+        </div>
+        <article class="agency-card callout-card">
+            <h3>Need to log an issue in this county?</h3>
+            <p>Use the incident desk form to submit an environmental issue for review by the relevant office.</p>
+            <a href="{{ url_for('incident_desk') }}">Report an incident</a>
+        </article>
+    </div>
+</section>
+
+<section class="section-shell split-section">
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Licensing</p>
+            <h2>Permits linked to {{ county.name }}</h2>
+        </div>
+        <div class="card-grid">
+            {% for license in county.licenses %}
+                <article class="agency-card service-card">
+                    <p class="card-meta">{{ license.category }} | {{ license.county_name }}</p>
+                    <h3>{{ license.title }}</h3>
+                    <p>{{ license.summary }}</p>
+                    <dl class="county-facts">
+                        <div>
+                            <dt>Processing</dt>
+                            <dd>{{ license.processing_window_days }} days</dd>
+                        </div>
+                        <div>
+                            <dt>Fee</dt>
+                            <dd>KES {{ "{:,.0f}".format(license.fee_ksh) }}</dd>
+                        </div>
+                    </dl>
+                    <p><strong>Applies to:</strong> {{ license.applies_to }}</p>
+                    <p><strong>Requirements:</strong> {{ license.requirements }}</p>
+                </article>
+            {% endfor %}
+            {% if not county.licenses %}
+                <article class="agency-card service-card">
+                    <h3>No licensing information available</h3>
+                    <p>Licensing information for this county is not available at the moment.</p>
+                    <a href="{{ url_for('licensing') }}">View licensing page</a>
+                </article>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <div class="section-heading">
+            <p class="eyebrow">Research</p>
+            <h2>Studies and field activity</h2>
+        </div>
+        <div class="timeline-list">
+            {% for activity in county.research_activities %}
+                <article class="timeline-item">
+                    <p class="card-meta">{{ activity.start_date|date_label }} | {{ activity.research_theme }}</p>
+                    <h3>{{ activity.title }}</h3>
+                    <p>{{ activity.summary }}</p>
+                    <span>{{ activity.county_name }} | {{ activity.status }}</span>
+                    <p><strong>Lead office:</strong> {{ activity.lead_office }}</p>
+                    <p><strong>Outputs:</strong> {{ activity.outputs }}</p>
+                </article>
+            {% endfor %}
+            {% if not county.research_activities %}
+                <article class="agency-card">
+                    <h3>No research activity available</h3>
+                    <p>Research and monitoring information for this county is not available at the moment.</p>
+                    <a href="{{ url_for('research') }}">View research page</a>
+                </article>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="page-hero page-hero-narrow">
+    <div>
+        <p class="eyebrow">County details</p>
+        <h1>County record not found</h1>
+        <p>The county page could not be loaded. Return to the directory and choose another county.</p>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
