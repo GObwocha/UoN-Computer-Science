@@ -4,7 +4,7 @@
 //SCS3/2596/2025
 
 //Link to the GitHub account where the project is:
-//https://github.com/GObwocha/schoolwork
+//https://github.com/GObwocha/SCS109-Intro to Programming
 
 #include <stdio.h>
 #include <stdlib.h>
