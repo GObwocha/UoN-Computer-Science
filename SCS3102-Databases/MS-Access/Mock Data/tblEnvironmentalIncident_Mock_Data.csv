@@ -1,0 +1,20 @@
+InvolvedOrganizationID,LeadAgencyID,Location,ReportedDate,SecurityLevel,Status,Report,IncidentType
+44,10,Mandera,27/02/2026,4,In Progress,Lorem ipsum dolor sit amet,Groundwater Contamination
+39,3,Lamu,25/02/2026,1,Resolved,Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Geothermal Gas Emissions
+13,48,Kilifi,27/02/2026,2,In Progress,Ut enim ad minim veniam,Agrochemical Runoff
+43,33,Taveta,22/02/2026,3,Resolved,Excepteur sint occaecat cupidatat non proident,Illegal Sand Harvesting
+22,21,Eldoret,24/02/2026,4,Resolved,Excepteur sint occaecat cupidatat non proident,Agrochemical Runoff
+6,31,Samburu,01/03/2026,3,In Progress,Lorem ipsum dolor sit amet,Illegal Sand Harvesting
+42,24,Garissa,28/02/2026,2,Resolved,sunt in culpa qui officia deserunt mollit anim id est laborum.,Geothermal Gas Emissions
+48,30,Turkana,26/02/2026,1,Resolved,Excepteur sint occaecat cupidatat non proident,Unregulated Blasting
+15,36,Embu,25/02/2026,4,Resolved,Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Transformer Oil Leaks
+34,33,Kitui,22/02/2026,2,Resolved,Ut enim ad minim veniam,Unregulated Blasting
+13,49,Meru,21/02/2026,1,Resolved,Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.,Transformer Oil Leaks
+38,20,Maralal,24/02/2026,4,Resolved,Lorem ipsum dolor sit amet,Illegal Solid Waste Dumping
+22,23,Lodwar,24/02/2026,3,In Progress,Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.,Groundwater Contamination
+4,4,Lamu,25/02/2026,4,In Progress,consectetur adipiscing elit.,Air Pollution
+31,43,Maralal,23/02/2026,3,Resolved,Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.,Toxic Gas/Chemical Leak
+49,32,Nyandarua,21/02/2026,3,Resolved,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.,Agrochemical Runoff
+22,25,Narok,20/02/2026,1,Resolved,Excepteur sint occaecat cupidatat non proident,Dumpsite Fires
+46,40,Lamu,01/03/2026,3,In Progress,consectetur adipiscing elit.,Dust Nuisance
+22,20,Mombasa,27/02/2026,5,Resolved,Excepteur sint occaecat cupidatat non proident,Unregulated Blasting
